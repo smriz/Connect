@@ -9,7 +9,7 @@ const port = process.env.PORT || 5000;
 app.set(port, () => console.log(`Server started on port ${port}`));
 
 // app.set("port", 3000);
-app.use(bodyParser.urlencoded({ extended: false }));
+app.listen(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
 let server = http.createServer(app);
