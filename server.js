@@ -5,7 +5,10 @@ const express = require("express"),
 morgon = require("morgan");
 
 let app = express();
-app.set("port", 3000);
+const port = process.env.PORT || 5000;
+app.set(port, () => console.log(`Server started on port ${port}`));
+
+// app.set("port", 3000);
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 

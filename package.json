@@ -1,5 +1,5 @@
 {
-  "name": "socket-io-chat-server",
+  "name": "xcrosstalk",
   "version": "1.0.0",
   "description": "chat server with node js and socket io for android application",
   "main": "server/server.js",
