@@ -2,6 +2,7 @@ const express = require("express"),
   http = require("http"),
   bodyParser = require("body-parser"),
   hashMap = require("hashmap");
+morgon = require("morgan");
 
 let app = express();
 app.set("port", 3000);
@@ -16,7 +17,7 @@ const { User } = require("./schema/user");
 const roomApi = require("./routes/api/room");
 const messageApi = require("./routes/api/message");
 const { authenticateUser } = require("./middleware/authenticateUser");
-
+app.use(morgon);
 app.post("/user/login", userApi.login);
 app.post("/user/register", userApi.register);
 app.get("/user/:username", userApi.findUserName);
@@ -52,7 +53,7 @@ io.on("connection", function (socket) {
   console.log("[socket] connected :" + socket.id);
 
   //event join room
-  socket.on("join", async function (room) {
+  socket.on("connect", async function (room) {
     //android device pass parameter "room id " to the event and join
     socket.join(room);
   });
