@@ -1,7 +1,8 @@
-const FCM = require("fcm-node");
+// const FCM = require("fcm-node");
 const serverKey =
   "AAAAqTFc4W4:APA91bHOw7__lx3DPzYOlFGoJ4jktmBEVLAPVLt5sDaRnZCHQV2G1MyLqEubvm6MFxlf9CrnwEBaLqcRJRBOsUhU64lm0OkDytYqzwCmQOHV1yEE22Gbfm2ilgAOpzywrk_BYrwGk"; //put your server key here
-const fcm = new FCM(serverKey);
+const fcm = {};
+// const fcm = new FCM(serverKey);
 
 //notify user from unread message with firebase
 exports.unreadMessage = function (message) {
