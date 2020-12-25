@@ -2,14 +2,13 @@ const express = require("express"),
   http = require("http"),
   bodyParser = require("body-parser"),
   hashMap = require("hashmap");
-morgon = require("morgan");
 
 let app = express();
-const port = process.env.PORT || 5000;
-app.set(port, () => console.log(`Server started on port ${port}`));
 
-// app.set("port", 3000);
-app.listen(bodyParser.urlencoded({ extended: false }));
+const portN = process.env.PORT || 3000;
+
+const port = app.set("port", portN);
+app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
 let server = http.createServer(app);
@@ -20,11 +19,10 @@ const { User } = require("./schema/user");
 const roomApi = require("./routes/api/room");
 const messageApi = require("./routes/api/message");
 const { authenticateUser } = require("./middleware/authenticateUser");
-app.use(morgon);
+
 app.post("/user/login", userApi.login);
 app.post("/user/register", userApi.register);
 app.get("/user/:username", userApi.findUserName);
-// app.get("/user/:fcm_key", userApi.findUserName);
 app.post("/room", authenticateUser, roomApi.createRoom);
 app.get("/room", authenticateUser, roomApi.getRooms);
 app.get("/room/:room", authenticateUser, roomApi.getRoom);
@@ -56,7 +54,7 @@ io.on("connection", function (socket) {
   console.log("[socket] connected :" + socket.id);
 
   //event join room
-  socket.on("connect", async function (room) {
+  socket.on("join", async function (room) {
     //android device pass parameter "room id " to the event and join
     socket.join(room);
   });

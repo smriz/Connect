@@ -1,14 +1,19 @@
-
-
-let createResponse = function (resStatus, msg, result, recordCount, pageNo, limit) {
-    return {
-        status: resStatus,
-        message: msg,
-        data: result,
-        dataCount: recordCount,
-        pageNo: pageNo,
-        limit: limit
-    };
+let createResponse = function (
+  resStatus,
+  msg,
+  result,
+  recordCount,
+  pageNo,
+  limit
+) {
+  return {
+    status: resStatus,
+    message: msg,
+    data: result,
+    dataCount: recordCount,
+    pageNo: pageNo,
+    limit: limit,
+  };
 };
 
 exports.SUCCESS = 1;
@@ -32,6 +37,6 @@ exports.REASON_USER_NEED_VERIFICATION = "USER_NOT_REGISTERED";
 exports.REASON_SERVER_ERR = "SERVER_ERROR";
 exports.REASON_INVALID_ENTITY = "INVALID_ENTITY";
 
-exports.MESSAGE_INVALID_ENTITY = "ورودی های اشتباه";
+exports.MESSAGE_INVALID_ENTITY = "INVALID";
 
 exports.createResponse = createResponse;

@@ -1,11 +1,11 @@
 {
-  "name": "xcrosstalk",
+  "name": "xrosstalk",
   "version": "1.0.0",
-  "description": "chat server with node js and socket io for android application",
+  "description": "",
   "main": "server/server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "NODE_ENV=production  node server.js"
+    "start": "NODE_ENV=production  node server/server.js"
   },
   "keywords": [
     "socket.io"
@@ -22,9 +22,10 @@
     "lodash": "^4.17.15",
     "mongodb": "^3.5.7",
     "mongoose": "^5.9.14",
-    "morgan": "^1.10.0",
     "persian-date": "^1.1.0",
     "shortid": "^2.2.15",
     "socket.io": "^2.3.0"
-  }
+  },
+  "author": "",
+  "license": ""
 }
