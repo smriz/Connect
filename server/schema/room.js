@@ -12,7 +12,7 @@ let ChatType = {
 let RoomSchema = new Schema({
   code: { type: String, trim: true, unique: true },
 
-  users: [{ type: ObjectId, ref: "User" }],
+  users: [[id:{type: ObjectId, ref:  'User’},mood:{ type:String, default:'white’}] ],
 
   last_msg_id: { type: ObjectId, ref: "Message", default: null },
 
