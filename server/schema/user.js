@@ -4,16 +4,46 @@ const bcrypt = require("bcrypt");
 const { generateSignToken, genUuid } = require("./../utils/utils");
 
 let userSchema = new Schema({
-  name: { type: String, trim: true, minlength: 3, maxlength: 30 },
-
-  username: {
-    type: String,
-    minlength: 5,
-    maxlength: 30,
-    unique: true,
-    trim: true,
-  },
-
+  
+   username:{
+            type:String ,
+            required : true,
+            unique :true,
+            minlength:3,
+            maxlength:30
+             },
+        firstname:{
+            type:String ,
+            required : true,
+            minlength:3,
+            maxlength:30
+             },
+        lastname:{
+            type:String ,
+            required : true,
+            minlength:3,
+            maxlength:30
+                 },
+        email:{
+            type:String ,
+            required : true,
+            unique :true,
+            lowercase: true,
+            default:""
+             },
+        gender:{
+            type:String,
+            default:""
+        }, 
+        country:{
+            type:String,
+            default:""
+        },     
+        phoneno:{
+            type:Number,
+            required:true,
+            length:10
+        }, 
   public_key: { type: String, unique: true },
 
   secret_key: { type: String, trim: true },
@@ -29,7 +59,7 @@ let userSchema = new Schema({
     default: " ",
     trim: true,
   },
-  mood: { type: String, required: true, default: "happy" },
+  
 
   last_seen: { type: Number, required: true, default: new Date().getTime() },
 
