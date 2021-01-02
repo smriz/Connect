@@ -1,19 +1,19 @@
 const jwt = require('jsonwebtoken');
-const persianDate = require('persian-date');
+const date = require('date-and-time');
 const crypto = require('crypto');
-persianDate.toLocale('en');
+date.toLocale('en');
 
 
 let getCurrentDate = () => {
-    return new persianDate().format('YYYY-MM-DD HH:mm:ss');
+    return new date().format('YYYY-MM-DD HH:mm:ss');
 }
 
 let getCurrentMonthName = () => {
-    return new persianDate().format('MMMM');
+    return new date().format('MMMM');
 }
 
 let getCurrentDayName = () => {
-    return new persianDate().format('dddd');
+    return new date().format('dddd');
 }
 let generateRandomNum = (min, max) => {
     min = Math.ceil(min);
