@@ -96,14 +96,24 @@ exports.login = async function (req, res) {
 exports.register = async function (req, res) {
   try {
     let body = _.pick(req.body, [
-      "name",
+      "firstname",
+      "lastname",
+      "email",
+      "country",
+      "gender",
+      "phoneno"
       "username",
       "password",
       "device_model",
     ]);
     const verifyJoiSchema = {
       username: Joi.string().required(),
-      name: Joi.string().required(),
+      firstname: Joi.string().required(),
+      lastname: Joi.string().required(),
+      email:Joi.string().required(),
+      country: Joi.string().required(),
+      gender: Joi.string().required(),
+      phoneno: Joi.string().required(),
       device_model: Joi.string().required(),
       password: Joi.string().required(),
     };
