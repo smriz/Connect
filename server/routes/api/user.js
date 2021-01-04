@@ -101,7 +101,7 @@ exports.register = async function (req, res) {
       "email",
       "country",
       "gender",
-      "phoneno"
+      "phoneno",
       "username",
       "password",
       "device_model",
@@ -110,7 +110,7 @@ exports.register = async function (req, res) {
       username: Joi.string().required(),
       firstname: Joi.string().required(),
       lastname: Joi.string().required(),
-      email:Joi.string().required(),
+      email: Joi.string().required(),
       country: Joi.string().required(),
       gender: Joi.string().required(),
       phoneno: Joi.string().required(),
