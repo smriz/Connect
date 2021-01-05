@@ -4,46 +4,45 @@ const bcrypt = require("bcrypt");
 const { generateSignToken, genUuid } = require("./../utils/utils");
 
 let userSchema = new Schema({
-  
-   username:{
-            type:String ,
-            required : true,
-            unique :true,
-            minlength:3,
-            maxlength:30
-             },
-        firstname:{
-            type:String ,
-            required : true,
-            minlength:3,
-            maxlength:30
-             },
-        lastname:{
-            type:String ,
-            required : true,
-            minlength:3,
-            maxlength:30
-                 },
-        email:{
-            type:String ,
-            required : true,
-            unique :true,
-            lowercase: true,
-            default:""
-             },
-        gender:{
-            type:String,
-            default:""
-        }, 
-        country:{
-            type:String,
-            default:""
-        },     
-        phoneno:{
-            type:Number,
-            required:true,
-            length:10
-        }, 
+  username: {
+    type: String,
+    required: true,
+    unique: true,
+    minlength: 3,
+    maxlength: 30,
+  },
+  firstname: {
+    type: String,
+    required: true,
+    minlength: 3,
+    maxlength: 30,
+  },
+  lastname: {
+    type: String,
+    required: true,
+    minlength: 3,
+    maxlength: 30,
+  },
+  email: {
+    type: String,
+    required: true,
+    unique: true,
+    lowercase: true,
+    default: "",
+  },
+  gender: {
+    type: String,
+    default: "",
+  },
+  country: {
+    type: String,
+    default: "",
+  },
+  phoneno: {
+    type: Number,
+    required: true,
+    length: 10,
+  },
   public_key: { type: String, unique: true },
 
   secret_key: { type: String, trim: true },
@@ -59,7 +58,6 @@ let userSchema = new Schema({
     default: " ",
     trim: true,
   },
-  
 
   last_seen: { type: Number, required: true, default: new Date().getTime() },
 

@@ -15,6 +15,7 @@
     "bcryptjs": "^2.4.3",
     "body-parser": "^1.19.0",
     "config": "^3.3.1",
+    "date-and-time": "^0.14.2",
     "express": "^4.17.1",
     "hashmap": "^2.4.0",
     "joi": "^14.3.1",
@@ -22,7 +23,6 @@
     "lodash": "^4.17.15",
     "mongodb": "^3.5.7",
     "mongoose": "^5.9.14",
-    "persian-date": "^1.1.0",
     "shortid": "^2.2.15",
     "socket.io": "^2.3.0"
   },
