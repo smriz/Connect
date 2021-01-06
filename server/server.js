@@ -20,6 +20,20 @@ const roomApi = require("./routes/api/room");
 const messageApi = require("./routes/api/message");
 const { authenticateUser } = require("./middleware/authenticateUser");
 
+app.use((req, res, next) => {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header(
+    "Access-Control-Allow-Headers",
+    "Origin,X-Requested-With,Content-Type,Accept,Authorization"
+  );
+
+  if (req.method === "OPTIONS") {
+    res.header("Access-Control-Allow-Methods", "GET,PUT,POST,DELETE,OPTIONS");
+    return res.status(200).json({});
+  }
+  next();
+});
+
 app.post("/user/login", userApi.login);
 app.post("/user/register", userApi.register);
 app.get("/user/:username", userApi.findUserName);
