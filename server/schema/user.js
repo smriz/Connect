@@ -8,7 +8,7 @@ let userSchema = new Schema({
     type: String,
     required: true,
     unique: true,
-    minlength: 3,
+    minlength: 2,
     maxlength: 30,
   },
   firstname: {
@@ -20,7 +20,7 @@ let userSchema = new Schema({
   lastname: {
     type: String,
     required: true,
-    minlength: 3,
+    minlength: 1,
     maxlength: 30,
   },
   email: {
