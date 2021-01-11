@@ -1,5 +1,6 @@
 const { mongoose } = require("./../database/mongoose");
 let Schema = mongoose.Schema;
+let ObjectId = Schema.ObjectId;
 const bcrypt = require("bcrypt");
 const { generateSignToken, genUuid } = require("./../utils/utils");
 
@@ -57,8 +58,18 @@ let userSchema = new Schema({
     {
       type: { type: String, default: "public" },
       mood: { type: String, default: "white" },
+      bff: { type: String, default: "" },
+      friends: { type: String, default: "0" },
+      fans: { type: String, default: "0" },
+      bio: { type: String, default: "" },
+      tag: { type: String, default: "messanger" },
+      profile_visits: { type: String, default: "0" },
+      connections: { type: String, default: "0" },
+      popularity: { type: String, default: "new" },
     },
   ],
+
+  requests: [{ id: { type: ObjectId, ref: "User" } }],
 
   last_seen: { type: Number, required: true, default: new Date().getTime() },
 
