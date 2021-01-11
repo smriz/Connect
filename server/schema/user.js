@@ -53,11 +53,12 @@ let userSchema = new Schema({
 
   device_model: { type: String, trim: true, default: null },
 
-  profile: {
-    type: String,
-    default: " ",
-    trim: true,
-  },
+  profile: [
+    {
+      type: { type: String, default: "public" },
+      mood: { type: String, default: "white" },
+    },
+  ],
 
   last_seen: { type: Number, required: true, default: new Date().getTime() },
 
