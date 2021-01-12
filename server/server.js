@@ -37,6 +37,7 @@ app.use((req, res, next) => {
 app.post("/user/login", userApi.login);
 app.post("/user/register", userApi.register);
 app.get("/user/:username", userApi.findUserName);
+app.get("/user", userApi.users);
 app.post("/room", authenticateUser, roomApi.createRoom);
 app.get("/room", authenticateUser, roomApi.getRooms);
 app.get("/room/:room", authenticateUser, roomApi.getRoom);

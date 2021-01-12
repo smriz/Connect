@@ -184,3 +184,38 @@ exports.findUserName = async function (req, res) {
       );
   }
 };
+
+exports.users = async function (req, res) {
+  try {
+    const foundUsers = await User.find();
+
+    return res.status(response.STATUS_OK).json(
+      response.createResponse(response.SUCCESS, `Success`, {
+        users: foundUsers,
+      })
+    );
+  } catch (e) {
+    console.log(e);
+    return res
+      .status(response.STATUS_BAD_REQUEST)
+      .json(
+        response.createResponse(response.ERROR, "Something went wrong :" + e)
+      );
+  }
+};
+
+exports.user_update = async function (req, res) {
+  const username = req.params.username;
+  Users.updateOne({ username: req.params.username }, req.body)
+    .then((result) => res.json(result))
+    .catch((err) => {
+      res
+        .status(response.STATUS_BAD_REQUEST)
+        .json(
+          response.createResponse(
+            response.ERROR,
+            "Something went wrong :" + err
+          )
+        );
+    });
+};
