@@ -161,3 +161,48 @@ exports.getRoom = async function (req, res) {
       .json(response.createResponse(response.ERROR, e));
   }
 };
+
+exports.room_update = async function (req, res) {
+  try {
+    let id = req.params.room;
+    await Message.updateMany(
+      { room: id },
+      { read_status: ReadStatus.READ },
+      { multi: true }
+    );
+
+    let foundedRoom = await Room.findById(id)
+      .populate("users", "_id name username profile last_seen", {
+        _id: {
+          $ne: req.user._id,
+        },
+      })
+      .populate("last_msg_id")
+      .populate({
+        path: "last_msg_id",
+        populate: { path: "from" },
+      })
+      .populate("admin", "_id name username profile last_seen");
+
+    let roomMessages = await Message.find({ room: foundedRoom.id }).populate(
+      "from",
+      "_id name username profile last_seen"
+    );
+
+    return res.status(response.STATUS_OK).json(
+      response.createResponse(
+        response.SUCCESS,
+        "Success",
+        {
+          room: foundedRoom,
+          messages: roomMessages,
+        },
+        foundedRoom.length
+      )
+    );
+  } catch (e) {
+    return res
+      .status(response.SERVER_ERROR)
+      .json(response.createResponse(response.ERROR, e));
+  }
+};

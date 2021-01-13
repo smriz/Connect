@@ -54,20 +54,18 @@ let userSchema = new Schema({
 
   device_model: { type: String, trim: true, default: null },
 
-  profile: [
-    {
-      type: { type: String, default: "public" },
-      mood: { type: String, default: "white" },
-      bff: { type: String, default: "" },
-      friends: { type: String, default: "0" },
-      fans: { type: String, default: "0" },
-      bio: { type: String, default: "" },
-      tag: { type: String, default: "messanger" },
-      profile_visits: { type: String, default: "0" },
-      connections: { type: String, default: "0" },
-      popularity: { type: String, default: "new" },
-    },
-  ],
+  profile: {
+    type: { type: String, default: "public" },
+    mood: { type: String, default: "white" },
+    bff: { type: String, default: "" },
+    friends: { type: String, default: "0" },
+    fans: { type: String, default: "0" },
+    bio: { type: String, default: "" },
+    tag: { type: String, default: "messanger" },
+    profile_visits: { type: String, default: "0" },
+    connections: { type: String, default: "0" },
+    popularity: { type: String, default: "new" },
+  },
 
   requests: [{ id: { type: ObjectId, ref: "User" } }],
 
