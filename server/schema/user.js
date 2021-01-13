@@ -61,7 +61,7 @@ let userSchema = new Schema({
     friends: { type: String, default: "0" },
     fans: { type: String, default: "0" },
     bio: { type: String, default: "" },
-    tag: { type: String, default: "messanger" },
+    tag: { type: String, default: "messenger" },
     profile_visits: { type: String, default: "0" },
     connections: { type: String, default: "0" },
     popularity: { type: String, default: "new" },
