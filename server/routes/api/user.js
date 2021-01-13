@@ -206,7 +206,7 @@ exports.users = async function (req, res) {
 
 exports.user_update = async function (req, res) {
   const username = req.params.username;
-  Users.updateOne({ username: req.params.username }, req.body)
+  User.updateOne({ username: req.params.username }, req.body)
     .then((result) => res.json(result))
     .catch((err) => {
       res
