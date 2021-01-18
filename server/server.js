@@ -24,6 +24,7 @@ const { authenticateUser } = require("./middleware/authenticateUser");
 
 app.use((req, res, next) => {
   res.header("Access-Control-Allow-Origin", "*");
+  res.header("public_key", "*");
   res.header(
     "Access-Control-Allow-Headers",
     "Origin,X-Requested-With,Content-Type,Accept,Authorization,public_key"
