@@ -8,21 +8,22 @@ const {
 const response = require("../../routes/api/response");
 
 exports.createRoom = async function (req, res) {
-  let users = req.body.users;
+  let users = [];
+  users = req.body.users;
 
-  users.push(req.user._id);
+  // users.push(req.body._id);
 
   let uniqueList = [...new Set(users)];
 
-  let room = new Room({ users: uniqueList, admin: req.user._id });
+  let room = new Room({ users: uniqueList, admin: users[0].id });
 
   let foundedRoom = await Room.findOne({
-    admin: req.user._id,
+    admin: users[0].id,
     users: uniqueList,
   })
     .populate("users", "_id name username profile last_seen", {
       _id: {
-        $ne: req.user._id,
+        $ne: users[0].id,
       },
     })
     .populate("last_msg_id")
@@ -52,7 +53,7 @@ exports.createRoom = async function (req, res) {
         let roomCreated = await Room.findOne(room._id)
           .populate("users", "_id name username profile last_seen", {
             _id: {
-              $ne: req.user._id,
+              $ne: users[0].id,
             },
           })
           .populate("last_msg_id")
@@ -87,10 +88,10 @@ exports.createRoom = async function (req, res) {
 
 exports.getRooms = async function (req, res) {
   try {
-    let foundedRoom = await Room.find({ users: { $in: req.user._id } })
+    let foundedRoom = await Room.find({ users: { $in: req.body.id } })
       .populate("users", "_id name username profile last_seen", {
         _id: {
-          $ne: req.user._id,
+          $ne: req.body.id,
         },
       })
       .populate("last_msg_id")
@@ -129,7 +130,7 @@ exports.getRoom = async function (req, res) {
     let foundedRoom = await Room.findById(id)
       .populate("users", "_id name username profile last_seen", {
         _id: {
-          $ne: req.user._id,
+          $ne: req.body.id,
         },
       })
       .populate("last_msg_id")
@@ -163,46 +164,10 @@ exports.getRoom = async function (req, res) {
 };
 
 exports.room_update = async function (req, res) {
-  try {
-    let id = req.params.room;
-    await Message.updateMany(
-      { room: id },
-      { read_status: ReadStatus.READ },
-      { multi: true }
-    );
-
-    let foundedRoom = await Room.findById(id)
-      .populate("users", "_id name username profile last_seen", {
-        _id: {
-          $ne: req.user._id,
-        },
-      })
-      .populate("last_msg_id")
-      .populate({
-        path: "last_msg_id",
-        populate: { path: "from" },
-      })
-      .populate("admin", "_id name username profile last_seen");
-
-    let roomMessages = await Message.find({ room: foundedRoom.id }).populate(
-      "from",
-      "_id name username profile last_seen"
-    );
-
-    return res.status(response.STATUS_OK).json(
-      response.createResponse(
-        response.SUCCESS,
-        "Success",
-        {
-          room: foundedRoom,
-          messages: roomMessages,
-        },
-        foundedRoom.length
-      )
-    );
-  } catch (e) {
-    return res
-      .status(response.SERVER_ERROR)
-      .json(response.createResponse(response.ERROR, e));
-  }
+  //@desc    Update Users record
+  const iD = req.params.roomId;
+  Users.updateOne({ _id: req.params.id }, req.body)
+    .then((result) => res.json({ _id: iD }))
+    .catch((err) => res.json(err));
+  console.log("hllo");
 };

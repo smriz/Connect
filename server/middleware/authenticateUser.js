@@ -13,7 +13,7 @@ exports.authenticateUser = async (req, res, next) => {
         .status(response.STATUS_UNAUTHORIZED)
         .json(response.createResponse(response.FAILED, "UNAUTHORIZED"));
     }
-    req.user = _.pick(user, [
+    req.body.users = _.pick(user, [
       "_id",
       "name",
       "username",

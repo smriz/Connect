@@ -2,8 +2,10 @@ const express = require("express"),
   http = require("http"),
   bodyParser = require("body-parser"),
   hashMap = require("hashmap");
+const morgon = require("morgan");
 
 let app = express();
+app.use(morgon("dev"));
 
 const portN = process.env.PORT || 3000;
 
@@ -24,12 +26,12 @@ app.use((req, res, next) => {
   res.header("Access-Control-Allow-Origin", "*");
   res.header(
     "Access-Control-Allow-Headers",
-    "Origin,X-Requested-With,Content-Type,Accept,Authorization"
+    "Origin,X-Requested-With,Content-Type,Accept,Authorization,public_key"
   );
 
   if (req.method === "OPTIONS") {
     res.header("Access-Control-Allow-Methods", "GET,PUT,POST,DELETE,OPTIONS");
-    return res.status(200).json({});
+    return res.status(200).json("hello");
   }
   next();
 });
@@ -40,6 +42,8 @@ app.get("/user/:username", userApi.findUserName);
 app.put("/user/:username", userApi.user_update);
 app.get("/user", userApi.users);
 app.post("/room", authenticateUser, roomApi.createRoom);
+// app.post("/room", roomApi.createRoom);
+app.post("/room2/:roomId", roomApi.room_update);
 app.get("/room", authenticateUser, roomApi.getRooms);
 app.get("/room/:room", authenticateUser, roomApi.getRoom);
 

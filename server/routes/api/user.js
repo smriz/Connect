@@ -4,6 +4,7 @@ const { generateSignToken } = require("../../utils/utils");
 const Joi = require("joi");
 const _ = require("lodash");
 const bcrypt = require("bcrypt");
+const { result } = require("lodash");
 
 exports.login = async function (req, res) {
   try {
@@ -166,8 +167,8 @@ exports.findUserName = async function (req, res) {
     const foundUsers = await User.find(
       {
         $or: [{ username: { $regex: ".*" + username + ".*" } }],
-      },
-      "_id name username profile last_seen"
+      }
+      // "_id name username profile last_seen"
     );
 
     return res.status(response.STATUS_OK).json(
@@ -185,9 +186,12 @@ exports.findUserName = async function (req, res) {
   }
 };
 
-exports.users = async function (req, res) {
+exports.users_demo = async function (req, res) {
   try {
-    const foundUsers = await User.find();
+    const foundUsers = await User.find({
+      "profile.type": { $all: "private" },
+    });
+    // const foundUsers = await User.find();
 
     return res.status(response.STATUS_OK).json(
       response.createResponse(response.SUCCESS, `Success`, {
@@ -202,6 +206,55 @@ exports.users = async function (req, res) {
         response.createResponse(response.ERROR, "Something went wrong :" + e)
       );
   }
+};
+
+exports.users = async function (req, res) {
+  await User.find({
+    "profile.type": { $ne: "private" },
+  })
+    .then((foundusers) => {
+      return res.status(response.STATUS_OK).json(
+        response.createResponse(response.SUCCESS, `Success`, {
+          users: foundusers,
+        })
+      );
+    })
+    .catch((e) => {
+      console.log(e);
+      return res
+        .status(response.STATUS_BAD_REQUEST)
+        .json(
+          response.createResponse(response.ERROR, "Something went wrong :" + e)
+        );
+    });
+};
+
+exports.user_request = async function (req, res) {
+  const request = req.params.username;
+
+  const user = {
+    username: req.body.toString(),
+    id: req.body.id.toString(),
+  };
+
+  await User.find({
+    username: req.body.username,
+  })
+    .then((foundusers) => {
+      return res.status(response.STATUS_OK).json(
+        response.createResponse(response.SUCCESS, `Success`, {
+          users: foundusers,
+        })
+      );
+    })
+    .catch((e) => {
+      console.log(e);
+      return res
+        .status(response.STATUS_BAD_REQUEST)
+        .json(
+          response.createResponse(response.ERROR, "Something went wrong :" + e)
+        );
+    });
 };
 
 exports.user_update = async function (req, res) {
