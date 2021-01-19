@@ -30,11 +30,11 @@ app.use((req, res, next) => {
     "Access-Control-Allow-Headers",
     "Origin,X-Requested-With,Content-Type,Accept,Authorization,public_key"
   );
+  res.header("Access-Control-Allow-Methods", "GET,PUT,POST,DELETE");
 
-  if (req.method === "OPTIONS") {
-    res.header("Access-Control-Allow-Methods", "GET,PUT,POST,DELETE");
-    return res.status(200).json("hello");
-  }
+  // if (req.method === "OPTIONS") {
+  //   return res.status(200).json("hello");
+  // }
   next();
 });
 app.use(cors());
