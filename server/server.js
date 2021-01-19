@@ -54,20 +54,20 @@ let clients = new hashMap(); // for store online users
 
 io.use(async (socket, next) => {
   try {
-    //check to see if there is such a user?
-    let user = await User.findOne({
-      public_key: socket.handshake.query.public_key,
-    });
-    if (user) {
-      //exist : store user to hashmap and next()
-      clients.set(socket.id, user._id.toString());
-      console.log(clients);
-      await User.findByIdAndUpdate(user._id, { last_seen: 0 });
-      return next();
-    } else {
-      //not exist: don't allow user
-      console.log("err");
-    }
+    //   //check to see if there is such a user?
+    //   let user = await User.findOne({
+    //     public_key: socket.handshake.query.public_key,
+    //   });
+    //   if (user) {
+    //exist : store user to hashmap and next()
+    clients.set(socket.id, user._id.toString());
+    console.log(clients);
+    await User.findByIdAndUpdate(user._id, { last_seen: 0 });
+    return next();
+    // } else {
+    //   //not exist: don't allow user
+    //   console.log("err");
+    // }
   } catch (e) {
     console.log(e);
   }
