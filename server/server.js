@@ -59,7 +59,7 @@ io.use(async (socket, next) => {
     // let user = await User.findOne({
     //   public_key: socket.handshake.query.public_key,
     // });
-    // socket.emit("Varutha", { hello: "world" });
+    socket.emit("Varutha", { hello: "world" });
     // if (user) {
     //   // exist : store user to hashmap and next()
     //   clients.set(socket.id, user._id.toString());
@@ -67,7 +67,7 @@ io.use(async (socket, next) => {
     //   await User.findByIdAndUpdate(user._id, { last_seen: 0 });
     //   const listeners = socket.listenersAny();
     //   console.log(listeners);
-    //   return next();
+    return next();
     // } else {
     //   //not exist: don't allow user
     //   socket.emit("err");
