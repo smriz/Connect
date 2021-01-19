@@ -45,8 +45,8 @@ app.get("/user", userApi.users);
 app.post("/room", roomApi.createRoom);
 // app.post("/room", roomApi.createRoom);
 app.post("/room2/:roomId", roomApi.room_update);
-app.get("/room", authenticateUser, roomApi.getRooms);
-app.get("/room/:room", authenticateUser, roomApi.getRoom);
+app.get("/room", roomApi.getRooms);
+app.get("/room/:room", roomApi.getRoom);
 
 let clients = new hashMap(); // for store online users
 
