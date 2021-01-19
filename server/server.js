@@ -82,6 +82,8 @@ io.on("connection", function (socket) {
   socket.emit("Varutha", { hello: "world" });
   //event join room
   socket.on("join", async function (room) {
+    console.log("socket connected join");
+
     //android device pass parameter "room id " to the event and join
     socket.join(room);
   });
