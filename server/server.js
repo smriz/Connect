@@ -65,6 +65,8 @@ io.use(async (socket, next) => {
       clients.set(socket.id, user._id.toString());
       console.log(clients);
       await User.findByIdAndUpdate(user._id, { last_seen: 0 });
+      const listeners = socket.listenersAny();
+      console.log(listeners);
       return next();
     } else {
       //not exist: don't allow user
