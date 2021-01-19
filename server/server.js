@@ -42,7 +42,7 @@ app.post("/user/register", userApi.register);
 app.get("/user/:username", userApi.findUserName);
 app.put("/user/:username", userApi.user_update);
 app.get("/user", userApi.users);
-app.post("/room", authenticateUser, roomApi.createRoom);
+app.post("/room", roomApi.createRoom);
 // app.post("/room", roomApi.createRoom);
 app.post("/room2/:roomId", roomApi.room_update);
 app.get("/room", authenticateUser, roomApi.getRooms);
