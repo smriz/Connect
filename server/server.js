@@ -54,7 +54,7 @@ let clients = new hashMap(); // for store online users
 
 io.use(async (socket, next) => {
   try {
-    console.log(JSON.stringify(socket) + " djfhk");
+    console.log(socket.handshake.query.public_key + " djfhk");
     //check to see if there is such a user?
     let user = await User.findOne({
       public_key: socket.handshake.query.public_key,
