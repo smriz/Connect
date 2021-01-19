@@ -78,6 +78,7 @@ io.use(async (socket, next) => {
 
 io.on("connection", function (socket) {
   console.log("[socket] connected :" + socket.id);
+  console.log("socket connected");
   socket.emit("Varutha", { hello: "world" });
   //event join room
   socket.on("join", async function (room) {
