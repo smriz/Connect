@@ -59,6 +59,7 @@ io.use(async (socket, next) => {
     let user = await User.findOne({
       public_key: socket.handshake.query.public_key,
     });
+    socket.emit("Varutha", { hello: "world" });
     if (user) {
       // exist : store user to hashmap and next()
       clients.set(socket.id, user._id.toString());
@@ -77,7 +78,7 @@ io.use(async (socket, next) => {
 
 io.on("connection", function (socket) {
   console.log("[socket] connected :" + socket.id);
-
+  socket.emit("Varutha", { hello: "world" });
   //event join room
   socket.on("join", async function (room) {
     //android device pass parameter "room id " to the event and join
