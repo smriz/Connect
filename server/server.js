@@ -3,6 +3,7 @@ const express = require("express"),
   bodyParser = require("body-parser"),
   hashMap = require("hashmap");
 const morgon = require("morgan");
+const cors = require("cors");
 
 let app = express();
 app.use(morgon("dev"));
@@ -31,11 +32,12 @@ app.use((req, res, next) => {
   );
 
   if (req.method === "OPTIONS") {
-    res.header("Access-Control-Allow-Methods", "GET,PUT,POST,DELETE,OPTIONS");
+    res.header("Access-Control-Allow-Methods", "GET,PUT,POST,DELETE");
     return res.status(200).json("hello");
   }
   next();
 });
+app.use(cors());
 
 app.post("/user/login", userApi.login);
 app.post("/user/register", userApi.register);
