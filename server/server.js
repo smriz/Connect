@@ -52,38 +52,38 @@ app.get("/room/:room", roomApi.getRoom);
 
 let clients = new hashMap(); // for store online users
 
-io.use(async (socket, next) => {
-  try {
-    // console.log(socket.handshake.query.public_key + " djfhk");
-    // //check to see if there is such a user?
-    // let user = await User.findOne({
-    //   public_key: socket.handshake.query.public_key,
-    // });
-    socket.emit("Varutha", { hello: "world" });
-    // if (user) {
-    //   // exist : store user to hashmap and next()
-    //   clients.set(socket.id, user._id.toString());
-    //   console.log(clients);
-    //   await User.findByIdAndUpdate(user._id, { last_seen: 0 });
-    //   const listeners = socket.listenersAny();
-    //   console.log(listeners);
-    return next();
-    // } else {
-    //   //not exist: don't allow user
-    //   socket.emit("err");
-    //   console.log("err");
-    // }
-  } catch (e) {
-    console.log(e);
-  }
-});
+// io.use(async (socket, next) => {
+//   try {
+//     // console.log(socket.handshake.query.public_key + " djfhk");
+//     // //check to see if there is such a user?
+//     // let user = await User.findOne({
+//     //   public_key: socket.handshake.query.public_key,
+//     // });
+//     socket.emit("Varutha", { hello: "world" });
+//     // if (user) {
+//     //   // exist : store user to hashmap and next()
+//     //   clients.set(socket.id, user._id.toString());
+//     //   console.log(clients);
+//     //   await User.findByIdAndUpdate(user._id, { last_seen: 0 });
+//     //   const listeners = socket.listenersAny();
+//     //   console.log(listeners);
+//     return next();
+//     // } else {
+//     //   //not exist: don't allow user
+//     //   socket.emit("err");
+//     //   console.log("err");
+//     // }
+//   } catch (e) {
+//     console.log(e);
+//   }
+// });
 
-io.on("connection", function (socket) {
+io.on("connection", (socket) => {
   console.log("[socket] connected :" + socket.id);
   console.log("socket connected");
   socket.emit("Varutha", { hello: "world" });
   //event join room
-  socket.on("join", async function (room) {
+  socket.on("join", async (room) => {
     console.log("socket connected join");
 
     //android device pass parameter "room id " to the event and join
