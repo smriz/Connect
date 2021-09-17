@@ -1,6 +1,6 @@
 const mongoose = require("mongoose"); //mongoose
 const DB_URI =
-  "mongodb+srv://master:master123@cluster1.luv3e.mongodb.net/xrosstalk?retryWrites=true&w=majority"; // our local uri for MongoDB
+  "mongodb+srv://master:master1234@cluster1.luv3e.mongodb.net/xrosstalk?retryWrites=true&w=majority"; // our local uri for MongoDB
 
 mongoose
   .connect(DB_URI, {
